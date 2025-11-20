@@ -13,6 +13,7 @@ typedef struct particle{
     Vector2 p_vel;
     Color color;
     int radius;
+    double mass;
     struct particle *next;
 } Particles;
 
@@ -26,4 +27,4 @@ void insert_particle(System *s, int screenWidth, int screenHeight);
 void destroy (System *l);
 void draw_particles(System *s);
 void update_pos(System *s, int screenWidth, int screenHeight);
-void fix_overlaps(System *s);
+void fix_contacts(System *s, int screenWidth, int screenHeight);

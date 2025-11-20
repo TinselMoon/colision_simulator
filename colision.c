@@ -28,8 +28,8 @@ int main(int argc, char **argv){
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
-        for(int i = 0; i < 4; i++)fix_overlaps(s);
         update_pos(s, screenWidth, screenHeight);
+        for(int i = 0; i < 4; i++)fix_contacts(s, screenWidth, screenHeight);
         draw_particles(s);
         //DrawCircleV(teste->p_pos, circleRad, RED);
 

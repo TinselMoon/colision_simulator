@@ -33,6 +33,7 @@ void insert_particle(System *s, int screenWidth, int screenHeight){
     p->p_vel.x = (-MAX_SPEED/2) + rand() % MAX_SPEED;
     p->p_vel.y = (-MAX_SPEED/2) + rand() % MAX_SPEED;
     p->color = values[rand()%num_colors];
+    p->mass = M_PI*p->radius*p->radius; // Multiply by a mass constant
     if(s->head == NULL){
         s->head = p;
         s->tail = p;
@@ -61,8 +62,24 @@ void draw_particles(System *s){
     }
 }
 
-void fix_overlaps(System *s){
+void fix_contacts(System *s, int screenWidth, int screenHeight){
     for(Particles *p1 = s->head; p1 != NULL; p1 = p1->next){
+        if((p1->p_pos.x+p1->radius) > screenWidth){
+            p1->p_pos.x = screenWidth - p1->radius;
+            p1->p_vel.x = -(p1->p_vel.x);
+        }
+        else if((p1->p_pos.x-p1->radius) < 0){
+            p1->p_pos.x = 0 + p1->radius;
+            p1->p_vel.x = -(p1->p_vel.x);
+        }
+        if((p1->p_pos.y+p1->radius) > screenHeight){
+            p1->p_pos.y = screenHeight - p1->radius;
+            p1->p_vel.y = -(p1->p_vel.y);
+        }
+        else if((p1->p_pos.y-p1->radius) < 0){
+            p1->p_pos.y = 0 + p1->radius;
+            p1->p_vel.y = -(p1->p_vel.y);
+        }
         for(Particles *p2 = p1->next; p2 != NULL; p2 = p2->next){
             double dist_x = p1->p_pos.x - p2->p_pos.x;
             double dist_y = p1->p_pos.y - p2->p_pos.y;
@@ -82,6 +99,8 @@ void fix_overlaps(System *s){
                 p1->p_pos.y += norm_y * (overlap * 0.5);
                 p2->p_pos.x -= norm_x * (overlap * 0.5);
                 p2->p_pos.y -= norm_y * (overlap * 0.5);
+
+                // Update velocities
             }
         }
     }
