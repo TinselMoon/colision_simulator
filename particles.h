@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define CIRCLE_RAD 100
+#define CIRCLE_RAD_MAX 100
+#define CIRCLE_RAD_MIN 40
 #define MAX_SPEED 501
 
 typedef struct particle{
     Vector2 p_pos;
     Vector2 p_vel;
+    Color color;
+    int radius;
     struct particle *next;
 } Particles;
 
