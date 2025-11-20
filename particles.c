@@ -46,18 +46,43 @@ void insert_particle(System *s, int screenWidth, int screenHeight){
 void destroy (System *l) {
     if (l != NULL) {	
         Particles *h = l->head;	
-        int counter = 0;
         while (h != NULL) {
-            counter++;
             Particles *t = h->next; 
             free (h); 
             h = t;
         }
     }
+    free(l);
 }
 
 void draw_particles(System *s){
     for(Particles *l = s->head; l != NULL; l=l->next){
         DrawCircleV(l->p_pos, l->radius, l->color);
+    }
+}
+
+void fix_overlaps(System *s){
+    for(Particles *p1 = s->head; p1 != NULL; p1 = p1->next){
+        for(Particles *p2 = p1->next; p2 != NULL; p2 = p2->next){
+            double dist_x = p1->p_pos.x - p2->p_pos.x;
+            double dist_y = p1->p_pos.y - p2->p_pos.y;
+            double sqr_dist = dist_x*dist_x + dist_y*dist_y;
+            double sum_radius = p1->radius + p2->radius;
+            if(sqr_dist < sum_radius*sum_radius){
+                double dist = sqrt(sqr_dist);
+                if(dist < 0.0001){
+                    dist_x = 1.0;
+                    dist_y = 0.0;
+                    dist = 1.0;
+                }
+                double overlap = sum_radius - dist;
+                double norm_x = dist_x/dist;
+                double norm_y = dist_y/dist;
+                p1->p_pos.x += norm_x * (overlap * 0.5);
+                p1->p_pos.y += norm_y * (overlap * 0.5);
+                p2->p_pos.x -= norm_x * (overlap * 0.5);
+                p2->p_pos.y -= norm_y * (overlap * 0.5);
+            }
+        }
     }
 }

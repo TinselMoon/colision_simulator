@@ -16,7 +16,6 @@ int main(int argc, char **argv){
         insert_particle(s, screenWidth, screenHeight);
 
     InitWindow(screenWidth, screenHeight, "colisions simulator");
-
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
     // Main game loop
@@ -29,7 +28,8 @@ int main(int argc, char **argv){
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
-        update_pos(s, screenWidth, screenHeight);
+        //update_pos(s, screenWidth, screenHeight);
+        for(int i = 0; i < 4; i++)fix_overlaps(s);
         draw_particles(s);
         //DrawCircleV(teste->p_pos, circleRad, RED);
 

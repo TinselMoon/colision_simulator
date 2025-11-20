@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
 #define CIRCLE_RAD_MAX 100
 #define CIRCLE_RAD_MIN 40
@@ -25,3 +26,4 @@ void insert_particle(System *s, int screenWidth, int screenHeight);
 void destroy (System *l);
 void draw_particles(System *s);
 void update_pos(System *s, int screenWidth, int screenHeight);
+void fix_overlaps(System *s);
