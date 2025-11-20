@@ -8,6 +8,8 @@ Color values[] = {DARKGRAY, MAROON, ORANGE, DARKGREEN, DARKBLUE, DARKPURPLE,
                     DARKBROWN, GRAY, RED, GOLD, LIME, BLUE, VIOLET, BROWN,
                     LIGHTGRAY, PINK, YELLOW, GREEN, SKYBLUE, PURPLE, BEIGE};
 
+int num_colors = sizeof(values)/sizeof(values[0]);
+
 System* create () {
     System *l = (System *)malloc(sizeof(System));
     l->head = NULL;
@@ -30,7 +32,7 @@ void insert_particle(System *s, int screenWidth, int screenHeight){
     p->p_pos.y = rand() % (screenHeight - 2*p->radius) + p->radius;
     p->p_vel.x = (-MAX_SPEED/2) + rand() % MAX_SPEED;
     p->p_vel.y = (-MAX_SPEED/2) + rand() % MAX_SPEED;
-    p->color = values[rand()%21];
+    p->color = values[rand()%num_colors];
     if(s->head == NULL){
         s->head = p;
         s->tail = p;
