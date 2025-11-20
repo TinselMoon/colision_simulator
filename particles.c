@@ -63,48 +63,22 @@ void draw_particles(System *s){
 }
 
 void ResolveCollision(Particles *p1, Particles *p2) {
-    // 1. Vetor r_ij (Vetor Normal: aponta do centro de p1 para p2)
-    // r_ij = pos_j - pos_i
     double dx = p2->p_pos.x - p1->p_pos.x;
     double dy = p2->p_pos.y - p1->p_pos.y;
-    
     double distSq = dx*dx + dy*dy;
     double dist = sqrt(distSq);
-
-    // Segurança contra divisão por zero
     if (dist == 0) return;
-
-    // 2. Vetor Unitário r_hat_ij (Normalizado)
     double nx = dx / dist;
     double ny = dy / dist;
-
-    // 3. Vetor v_ij (Velocidade Relativa: v_i - v_j)
     double dvx = p1->p_vel.x - p2->p_vel.x;
     double dvy = p1->p_vel.y - p2->p_vel.y;
-
-    // 4. Produto Escalar (r_hat_ij . v_ij)
-    // Projeta a velocidade relativa na direção normal
     double dot_product = (nx * dvx) + (ny * dvy);
-
-    // IMPORTANTE: Se o produto escalar for negativo ou zero, as partículas
-    // já estão se afastando. Não devemos resolver a colisão novamente (evita "grudar").
-    // Na nossa definição (p1->p2), se dot > 0 elas estão se aproximando.
     if (dot_product <= 0) return;
-
-    // 5. Massas (Usando raio^2 como aproximação para massa em 2D)
     double mass_sum = p1->mass + p2->mass;
-
-    // 6. Implementando a Equação para v'_i (p1)
-    // v'_i = v_i - [2*mj / (mi + mj)] * (dot_product) * r_hat
     double factor_p1 = (2.0 * p2->mass / mass_sum) * dot_product;
-    
     p1->p_vel.x -= factor_p1 * nx;
     p1->p_vel.y -= factor_p1 * ny;
-
-    // 7. Implementando a Equação Simétrica para v'_j (p2)
-    // Pela 3ª Lei de Newton, a força é igual e oposta, mas escalada pela massa de p1
     double factor_p2 = (2.0 * p1->mass / mass_sum) * dot_product;
-    
     p2->p_vel.x += factor_p2 * nx;
     p2->p_vel.y += factor_p2 * ny;
 }
