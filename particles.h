@@ -28,3 +28,4 @@ void destroy (System *l);
 void draw_particles(System *s);
 void update_pos(System *s, int screenWidth, int screenHeight);
 void fix_contacts(System *s, int screenWidth, int screenHeight);
+void ResolveCollision(Particles *p1, Particles *p2);
