@@ -20,6 +20,7 @@ void destroy (System *l);
 void draw_particles(System *s);
 void update_pos(System *s, int screenWidth, int screenHeight);
 void fix_contacts(System *s, int screenWidth, int screenHeight);
-void resolve_collision(Particles *p1, Particles *p2);
+void resolve_collision(Particles *p1, Particles *p2, double nx, double ny);
 void remove_particle(System *s);
 bool is_empty(System *s);
+double kinect_energy(System *s);

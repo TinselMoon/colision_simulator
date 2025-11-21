@@ -42,9 +42,10 @@ int main(int argc, char **argv){
         }
         fps = 1/GetFrameTime();
         DrawText(TextFormat("Number of Particles: %d\n"
+                            "Total kinect energy: %.0f\n"
                             "Press I to insert a particle\n"
                             "Press R to remove a particle\n"
-                            "FPS: %.2f", num_particles, fps), 10, 10, 30, DARKGRAY);
+                            "FPS: %.2f", num_particles, kinect_energy(s), fps), 10, 10, 30, DARKGRAY);
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
