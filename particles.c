@@ -1,6 +1,6 @@
-#ifndef PARTICLE
+#ifndef PARTICLE_H
 #include "particles.h"
-#define PARTICLE
+#define PARTICLE_H
 #endif
 
 double dt = (double)1/TARGET_FPS;

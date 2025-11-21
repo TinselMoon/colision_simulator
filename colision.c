@@ -1,5 +1,5 @@
-#ifndef PARTICLE
-#define PARTICLE
+#ifndef PARTICLE_H
+#define PARTICLE_H
 #include "particles.h"
 #endif
 
@@ -25,14 +25,11 @@ int main(int argc, char **argv){
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
 
-        //----------------------------------------------------------------------------------
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginDrawing();
         if (IsKeyPressed(KEY_I)){
             insert_particle(s, screenWidth, screenHeight);
             num_particles++;
         }
+        BeginDrawing();
         if(!is_empty(s)){
             ClearBackground(RAYWHITE);
             if (IsKeyPressed(KEY_R)){
@@ -48,15 +45,11 @@ int main(int argc, char **argv){
                             "Press I to insert a particle\n"
                             "Press R to remove a particle\n"
                             "FPS: %.2f", num_particles, fps), 10, 10, 30, DARKGRAY);
-        //DrawText("Press I to insert a particle\nPress R to remove a particle", 10, 40, 30, DARKGRAY);
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
     destroy(s);
     return 0;
 }
