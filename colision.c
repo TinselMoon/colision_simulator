@@ -5,7 +5,7 @@
 
 int main(int argc, char **argv){
     if(argc < 3){
-        printf("Error, no enough information\nRun: %s [width] [height] [num of particles]\n", argv[0]);
+        printf("Error, not enough information\nRun: %s [width] [height] [num of particles]\n", argv[0]);
         exit(0);
     }
     srand(time(NULL));
