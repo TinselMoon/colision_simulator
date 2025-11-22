@@ -88,6 +88,7 @@ double kinect_energy(System *s){
 }
 
 void resolve_collision(Particles *p1, Particles *p2, double nx, double ny) {
+    //Reference: https://physics.stackexchange.com/questions/681396/elastic-collision-3d-eqaution/681419#681419
     double dvx = p1->p_vel.x - p2->p_vel.x;
     double dvy = p1->p_vel.y - p2->p_vel.y;
     double dot_product = (nx * dvx) + (ny * dvy);
