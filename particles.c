@@ -93,7 +93,7 @@ void resolve_collision(Particles *p1, Particles *p2, double nx, double ny) {
     double dvx = p1->p_vel.x - p2->p_vel.x;
     double dvy = p1->p_vel.y - p2->p_vel.y;
     double dot_product = (nx * dvx) + (ny * dvy);
-    if (dot_product <= 0) return;
+    if(dot_product == 0) return;
     double mass_sum = p1->mass + p2->mass;
     double factor_p1 = (2.0 * p2->mass / mass_sum) * dot_product;
     p1->p_vel.x -= factor_p1 * nx;
