@@ -12,27 +12,27 @@ Este projeto requer a biblioteca **Raylib** para funcionar. Siga as instruções
 
 Para instalar a Raylib no Arch Linux, execute o comando no terminal:
 
-\`\`\`bash
+```bash
 sudo pacman -S raylib
-\`\`\`
+```
 
 ## 🔨 Compilação
 
-Para compilar o código, execute o comando na raiz do projeto:
+Para compilar o código, execute o comando:
 
-\`\`\`bash
+```bash
 make
-\`\`\`
+```
 
 ## ▶️ Execução
 
 Para executar o simulador, é necessário fornecer os parâmetros de largura, altura e número de partículas:
 
-\`\`\`bash
+```bash
 ./colision [width] [height] [num particles]
-\`\`\`
+```
 
 **Exemplo de uso:**
-\`\`\`bash
+```bash
 ./colision 800 600 100
-\`\`\`
+```
