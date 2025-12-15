@@ -1,7 +1,4 @@
-#ifndef PARTICLE_H
-#define PARTICLE_H
 #include "particles.h"
-#endif
 
 int main(int argc, char **argv){
     if(argc < 4){
