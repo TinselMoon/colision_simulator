@@ -78,9 +78,9 @@ void draw_particles(System *s){
 double kinetic_energy(System *s){
     double total_energy = 0;
     for(Particles *p = s->head; p != NULL; p = p->next){
+        double vel = (p->p_vel.x*p->p_vel.x + p->p_vel.y*p->p_vel.y);
         //Dividindo por 10 mil para não deixar o valor tão elevado
-        double vel = (p->p_vel.x*p->p_vel.x + p->p_vel.y*p->p_vel.y)/10000;
-        total_energy += vel*p->mass/2;
+        total_energy += vel*p->mass/20000;
     }
     return total_energy;
 }
